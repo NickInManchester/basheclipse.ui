@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            type="net.sf.basheclipse.core.launchConfigurationType.sh"
+            description="Debug a Bash script"
+            class="net.sf.basheclipse.ui.launching.BashTabGroup"
+            id="net.sf.basheclipse.ui.launchConfigurationTabGroup.sh">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.debugModelPresentations">
+      <debugModelPresentation
+            class="net.sf.basheclipse.ui.model.BashModelPresentation"
+            id="net.sf.basheclipse.sh">
+      </debugModelPresentation>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            class="net.sf.basheclipse.ui.model.BashBreakpointAdapterFactory"
+            adaptableType="net.sourceforge.shelled.ui.editor.ShellScriptEditor">
+				<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+      </factory>
+      
+      
+      
+      
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            targetID="net.sourceforge.shelled.ui.editor"
+            id="net.sourceforge.shelled.ui.editor.rulerActions">
+         <action
+               label="Not Used"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               style="push"
+               actionID="RulerDoubleClick"
+               id="pda.doubleClickBreakpointAction"/>
+      </editorContribution>
+   </extension>  
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            name="Debugging Bash"
+            description="Debugging Bash"
+            id="net.sf.basheclipse.ui.bash.debugging"
+            parentId="org.eclipse.debug.ui.debugging">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.debugModelContextBindings">
+      <modelContextBinding
+            debugModelId="net.sf.basheclipse.sh"
+            contextId="net.sf.basheclipse.ui.bash.debugging">
+      </modelContextBinding>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            icon="icons/full/obj16/rosetta.gif"
+            configTypeID="net.sf.basheclipse.core.launchConfigurationType.sh"
+            id="net.sf.basheclipse.ui.bash.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="net.sf.basheclipse.ui.model.BashSourceNotFoundEditor"
+            default="false"
+            id="org.eclipse.debug.ui.sourcelookup.CommonSourceNotFoundEditor"
+            name="SourceNotFoundEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.watchExpressionDelegates">
+      <watchExpressionDelegate
+            debugModel="net.sf.basheclipse.sh"
+            delegateClass="net.sf.basheclipse.ui.views.BashWatchExpressionDelegate">
+      </watchExpressionDelegate>
+   </extension>
+
+</plugin>
